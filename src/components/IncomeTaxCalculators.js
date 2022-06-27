@@ -286,7 +286,7 @@ export const getStateTax = (state, income) => {
   const stateCheck = checkState(state);
   const deductionCheck = stateCheck && checkDeduction(state);
   const standardDeduction = deductionCheck && getDeduction(state);
-  const returnDeduction = standardDeduction ? standardDeduction : 0;
+  const returnDeduction = standardDeduction ? Math.round(standardDeduction) : 0;
   const initialAGI = income -= standardDeduction;
   const marginalRate = stateCheck && parseFloat((getRate(state, initialAGI) * 100).toFixed(2));
   let tax = 0;
