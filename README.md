@@ -2,6 +2,7 @@
 
 Income Tax Calculator for 2022. The calculator assumes a single filer, W2 employee with standard deductions. It handles all US States and the District of Columbia. Enter your annual income and the 2 digit abbreviation for your state of residence to see the full estimated tax breakdown. *Enter "DC" for Washington, DC!*
 
+Visit http://jcseeley.github.io/Income-Tax-Calculator to use the app!
 
 # Getting Started with Create React App
 
