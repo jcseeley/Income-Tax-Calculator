@@ -53,7 +53,7 @@ const IncomeTaxDash = () => {
     const income = event.target.income.value;
     const state = event.target.state.value.toUpperCase();
     getValues(income, state);
-    document.getElementById("form").reset();
+    // document.getElementById("form").reset();
   }
 
   const getValues = (income, state) => {
@@ -153,7 +153,7 @@ const IncomeTaxDash = () => {
               <hr />
               <h1>Medicare:</h1>
               <hr />
-              <h1>State Deduction:</h1>
+              <h1><span>{state}</span> State Deduction:</h1>
               <hr />
               <h1><span>{state}</span> State AGI:</h1>
               <hr />
