@@ -23,6 +23,7 @@ const IncomeTaxDash = () => {
   const [fedEffective, setFedEffective] =  useState(0);
   const [stateEffective, setStateEffective] = useState(0);
   const [totalEffective, setTotalEffective] = useState(0);
+  const [totalMarginal, setTotalMarginal] = useState(0);
 
   function clearValues() {
     setGross(0);
@@ -79,14 +80,15 @@ const IncomeTaxDash = () => {
       const stateDeduct = stateValArr[3];
       const stateEffectiveVal = parseFloat(((stateVal / income) * 100).toFixed(2));
       const totalEffectiveVal = parseFloat(((totalVal / income) * 100).toFixed(2));
+      const totalMarginalVal = parseFloat((medMarginalVal + socialMarginalVal + fedMarginalVal + stateMarginalVal).toFixed(2))
       const netVal = Math.round(income - totalVal);
-      return setValues(income, state, medVal, medMarginalVal, medEffectiveVal, socialVal, socialMarginalVal, socialEffectiveVal, fedVal, fedMarginalVal, fedAGIVal, fedDeduct, fedEffectiveVal, stateVal, totalVal, stateMarginalVal, stateAGI, stateDeduct, stateEffectiveVal, totalEffectiveVal, netVal);
+      return setValues(income, state, medVal, medMarginalVal, medEffectiveVal, socialVal, socialMarginalVal, socialEffectiveVal, fedVal, fedMarginalVal, fedAGIVal, fedDeduct, fedEffectiveVal, stateVal, totalVal, stateMarginalVal, stateAGI, stateDeduct, stateEffectiveVal, totalEffectiveVal, totalMarginalVal, netVal);
     } else {
       return;
     }
   }
 
-  const setValues = (income, state, medVal, medMarginalVal, medEffectiveVal, socialVal, socialMarginalVal, socialEffectiveVal, fedVal, fedMarginalVal, fedAGIVal, fedDeduct, fedEffectiveVal, stateVal, totalVal, stateMarginalVal, stateAGI, stateDeduct, stateEffectiveVal, totalEffectiveVal, netIncome) => {
+  const setValues = (income, state, medVal, medMarginalVal, medEffectiveVal, socialVal, socialMarginalVal, socialEffectiveVal, fedVal, fedMarginalVal, fedAGIVal, fedDeduct, fedEffectiveVal, stateVal, totalVal, stateMarginalVal, stateAGI, stateDeduct, stateEffectiveVal, totalEffectiveVal, totalMarginalVal, netVal) => {
     setGross(Math.round(income));
     setState(state);
     setMedicare(medVal);
@@ -107,7 +109,8 @@ const IncomeTaxDash = () => {
     setStateDeduction(stateDeduct);
     setStateEffective(stateEffectiveVal);
     setTotalEffective(totalEffectiveVal);
-    setNet(netIncome);
+    setTotalMarginal(totalMarginalVal);
+    setNet(netVal);
   }
 
   return (
@@ -220,7 +223,7 @@ const IncomeTaxDash = () => {
               <hr className="border-white"/>
               <br />
               <hr className="border-white"/>
-              <h1>N/A</h1>
+              <h1>{totalMarginal}%</h1>
               <hr />
               <br />
               <hr className="border-white"/>
