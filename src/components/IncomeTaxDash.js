@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getMedicare, getSocialSecurity, getFedTax, getStateTax } from "./IncomeTaxCalculators";
+import { getMedicare, getSocialSecurity, getFedTax, getStateTax } from "../functions/IncomeTaxCalculators";
 
 const IncomeTaxDash = () => {
   const [gross, setGross] = useState(0);
@@ -53,7 +53,6 @@ const IncomeTaxDash = () => {
     const income = event.target.income.value;
     const state = event.target.state.value.toUpperCase();
     getValues(income, state);
-    // document.getElementById("form").reset();
   }
 
   const getValues = (income, state) => {
