@@ -115,140 +115,141 @@ const IncomeTaxDash = () => {
 
   return (
     <React.Fragment>
-      <div className="flex justify-center">
-        <div className="rounded overflow-hidden shadow-lg mb-2 mt-4">
-          <h1 className="text-center text-3xl font-bold">Income Tax Calculator</h1>
-          <form id="form" className="bg-white rounded px-8 pt-6 pb-4" onSubmit={handleFormSubmission}>
-            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-center leading-tight focus:outline-none focus:shadow-outline mb-2"
-              type='float'
-              name='income'
-              placeholder='Annual Income' />
-            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-center leading-tight focus:outline-none focus:shadow-outline mb-2"
-              type='string'
-              name='state'
-              placeholder='State Abbreviation' />
-              <p className="text-center text-sm italic">*Enter "DC" for Washington, DC*</p>
-            <div className="flex justify-center">
-              <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded mt-2" type='submit' onClick={() => clearValues()}>Get Tax Breakdown</button>
-            </div>
-          </form>
-          <hr />
-          <div className="grid grid-cols-4 mt-2 ml-2 mr-2 mb-2">
-            <div className="text-left ml-2 mb-2">
-              <h1 className="underline">Income</h1>
-              <hr className="border-white"/>
-              <h1>Gross:</h1>
-              <hr />
-              <h1 className="text-red-600">Total Tax:</h1>
-              <hr />
-              <h1 className="text-green-700">Net:</h1>
-              <hr />
-              <br />
-              <h1 className="underline">Tax Breakdown</h1>
-              <h1>Federal Deduction:</h1>
-              <hr />
-              <h1>Federal AGI:</h1>
-              <hr />
-              <h1>Federal Tax:</h1>
-              <hr />
-              <h1>Social Security:</h1>
-              <hr />
-              <h1>Medicare:</h1>
-              <hr />
-              <h1><span>{state}</span> State Deduction:</h1>
-              <hr />
-              <h1><span>{state}</span> State AGI:</h1>
-              <hr />
-              <h1><span>{state}</span> State Tax:</h1>
-              <hr />
-            </div>
-            <div className="text-right mb-2">
-              <br />
-              <hr className="border-white"/>
-              <h1>${gross.toLocaleString("en-US")}</h1>
-              <hr />
-              <h1 className="text-red-600">-${totalTax.toLocaleString("en-US")}</h1>
-              <hr />
-              <h1 className="text-green-700"><span>${net.toLocaleString("en-US")}</span></h1>
-              <hr />
-              <br />
-              <br />
-              <h1 className="text-blue-600">${fedDeduction.toLocaleString("en-US")}</h1>
-              <hr />
-              <h1 className="text-blue-600">${AGI.toLocaleString("en-US")}</h1>
-              <hr />
-              <h1><span className="text-orange-800">-${fedTax.toLocaleString("en-US")}</span></h1>
-              <hr />
-              <h1><span className="text-orange-800">-${social.toLocaleString("en-US")}</span></h1>
-              <hr />
-              <h1><span className="text-orange-800">-${medicare.toLocaleString("en-US")}</span></h1>
-              <hr />
-              <h1><span className="text-blue-600">${stateDeduction.toLocaleString("en-US")}</span></h1>
-              <hr />
-              <h1><span className="text-blue-600">${stateAGI.toLocaleString("en-US")}</span></h1>
-              <hr />
-              <h1><span className="text-orange-800">-${stateTax.toLocaleString("en-US")}</span></h1>
-              <hr />
-            </div>
-            <div className="text-center mb-2">
-              <h1 className="underline ml-2 mr-2">Effective Tax Rate:</h1>
-              <hr className="border-white"/>
-              <br />
-              <hr className="border-white"/>
-              <h1 className="text-red-600"><span>{totalEffective}</span>%</h1>
-              <hr />
-              <br />
-              <hr className="border-white"/>
-              <br />
-              <br />
-              <br />
-              <hr className="border-white"/>
-              <br />
-              <hr className="border-white"/>
-              <h1 className="text-orange-800"><span>{fedEffective}</span>%</h1>
-              <hr />
-              <h1 className="text-orange-800"><span>{socialEffective}</span>%</h1>
-              <hr />
-              <h1 className="text-orange-800"><span>{medEffective}</span>%</h1>
-              <hr />
-              <br />
-              <hr className="border-white"/>
-              <br />
-              <hr className="border-white"/>
-              <h1 className="text-orange-800"><span>{stateEffective}</span>%</h1>
-              <hr />
-            </div>
-            <div className="text-center mr-2">
-              <h1 className="underline">Marginal Tax Rate:</h1>
-              <hr className="border-white"/>
-              <br />
-              <hr className="border-white"/>
-              <h1>{totalMarginal}%</h1>
-              <hr />
-              <br />
-              <hr className="border-white"/>
-              <br />
-              <br />
-              <br />
-              <hr className="border-white"/>
-              <br />
-              <hr className="border-white"/>
-              <h1><span>{fedMarginal}</span>%</h1>
-              <hr />
-              <h1><span>{socialMarginal}</span>%</h1>
-              <hr />
-              <h1><span>{medMarginal}</span>%</h1>
-              <hr />
-              <br />
-              <hr className="border-white"/>
-              <br />
-              <hr className="border-white"/>
-              <h1><span>{stateMarginal}</span>%</h1>
-              <hr />
-            </div>
+      <div className="flex grid justify-center font-bold mt-2">
+        {/* Header */}
+        <h1 className="text-center text-4xl italic font-bold mb-2">Income Tax Calculator</h1>
+        {/* Form Start */}
+        <form id="form" className="grid flex-1 justify-self-center pt-1 px-4 pb-2 w-full" onSubmit={handleFormSubmission}>
+          {/* Input Div */}
+          <div className="justify-self-center">
+            <label className="input-group input-group-sm mb-2">
+              <span className="w-full">Annual Income</span>
+              <input className="input input-bordered input-sm text-center"
+                type='number'
+                step='.01'
+                name='income'
+                placeholder='$USD' />
+            </label>
+            <label className="input-group input-group-sm text-center mb-2">
+              <span className="w-full">State</span>
+              <input className="input input-bordered input-sm text-center"
+                type='string'
+                name='state'
+                placeholder='Abbreviation' />
+            </label>
           </div>
-          <p className="text-center text-sm italic mb-4">* assumes single file, W2 employee with standard deductions *</p>
-        </div>
+          <p className="text-center text-xs italic">Enter "DC" for Washington, DC</p>
+          <button className="btn btn-sm justify-self-center font-bold mt-2" type='submit' onClick={() => clearValues()}>Submit Form</button>
+          {/* Info */}
+          <p className="text-center text-sm italic text-red-500 mt-2">*Effective - actual tax rate paid*</p>
+          <p className="text-center text-sm italic text-orange-500 mt-1">*Marginal - tax rate paid on any additional income*</p>
+          <p className="text-center text-sm italic mt-1 mb-1">*Assumes single file, W2 employee with standard deductions*</p>
+        </form>
+        {/* Table Start */}
+        <table className="table table-compact flex-1 w-3/4 justify-self-center ml-2 mr-2 mb-4">
+          <thead>
+            <tr className="active">
+              <th className="w-1/5">Value</th>
+              <th className="text-right">Amount</th>
+              <th className="text-center text-red-500">Effective Rate</th>
+              <th className="text-center text-orange-500">Marginal Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* Gross Income */}
+            <tr className="hover">
+              <td className="text-yellow-500">Gross Income</td>
+              <td className="text-right text-yellow-500">${gross.toLocaleString("en-US")}</td>
+              <td></td>
+              <td></td>
+            </tr>
+            {/* Total Tax */}
+            <tr className="hover">
+              <td className="text-red-500">Total Tax</td>
+              <td className="text-red-500 text-right">-${totalTax.toLocaleString("en-US")}</td>
+              <td className="text-red-500 text-center">{totalEffective}%</td>
+              <td className="text-center text-orange-500">{totalMarginal}%</td>
+            </tr>
+            {/* Net Income */}
+            <tr className="hover">
+              <td className="text-green-500">Net Income</td>
+              <td className="text-green-500 text-right">${net.toLocaleString("en-US")}</td>
+              <td></td>
+              <td></td>
+            </tr>
+            {/* Blank - Federal Breakdown */}
+            <tr className="active">
+              <td className="text-sm">Federal Breakdown</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            {/* Federal Deduction */}
+            <tr className="hover">
+              <td className="text-blue-500">Federal Deduction</td>
+              <td className="text-right text-blue-500">${fedDeduction.toLocaleString("en-US")}</td>
+              <td></td>
+              <td></td>
+            </tr>
+            {/* Federal AGI */}
+            <tr className="hover">
+              <td className="text-blue-500">Federal AGI</td>
+              <td className="text-right text-blue-500">${AGI.toLocaleString("en-US")}</td>
+              <td></td>
+              <td></td>
+            </tr>
+            {/* Federal Tax */}
+            <tr className="hover">
+              <td className="text-red-500">Federal Tax</td>
+              <td className="text-right text-red-500">-${fedTax.toLocaleString("en-US")}</td>
+              <td className="text-center text-red-500">{fedEffective}%</td>
+              <td className="text-center text-orange-500">{fedMarginal}%</td>
+            </tr>
+            {/* Social Security */}
+            <tr className="hover">
+              <td className="text-red-500">Social Security</td>
+              <td className="text-right text-red-500">-${social.toLocaleString("en-US")}</td>
+              <td className="text-center text-red-500">{socialEffective}%</td>
+              <td className="text-center text-orange-500">{socialMarginal}%</td>
+            </tr>
+            {/* Medicare */}
+            <tr className="hover">
+              <td className="text-red-500">Medicare</td>
+              <td className="text-right text-red-500">-${medicare.toLocaleString("en-US")}</td>
+              <td className="text-center text-red-500">{medEffective}%</td>
+              <td className="text-center text-orange-500">{medMarginal}%</td>
+            </tr>
+            {/* Blank - Federal Breakdown */}
+            <tr className="active">
+              <td className="text-sm">State Breakdown</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            {/* State Deduction */}
+            <tr className="hover">
+              <td className="text-lime-500"><span>{state}</span> State Deduction</td>
+              <td className="text-right text-lime-500">${stateDeduction.toLocaleString("en-US")}</td>
+              <td></td>
+              <td></td>
+            </tr>
+            {/* State AGI */}
+            <tr className="hover">
+              <td className="text-lime-500"><span>{state}</span> State AGI</td>
+              <td className="text-right text-lime-500">${stateAGI.toLocaleString("en-US")}</td>
+              <td></td>
+              <td></td>
+            </tr>
+            {/* State Tax */}
+            <tr className="hover">
+              <td className="text-red-500"><span>{state}</span> State Tax</td>
+              <td className="text-right text-red-500">-${stateTax.toLocaleString("en-US")}</td>
+              <td className="text-center text-red-500">{stateEffective}%</td>
+              <td className="text-center text-orange-500">{stateMarginal}%</td>
+            </tr>
+          </tbody>
+        </table>
+        
       </div>
     </React.Fragment>
   );
